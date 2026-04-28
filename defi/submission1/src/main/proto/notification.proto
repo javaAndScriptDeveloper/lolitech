@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+package org.example.submission1;
+
+message Empty {}
+
+message ScheduledMessage {
+  string content = 1;
+  string timestamp = 2;
+}
+
+service NotificationService {
+  rpc SubscribeMessages (Empty) returns (stream ScheduledMessage);
+}
