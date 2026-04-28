@@ -1,4 +1,4 @@
-# Experimental Design & Optimization — Assignments
+# Statistics & Experimental Design — Assignments
 
 Three assignments applying statistical experiment design and response surface methods to empirical data.
 
