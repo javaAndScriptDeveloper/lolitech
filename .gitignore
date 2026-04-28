@@ -1,0 +1,10 @@
+# Claude Code tooling
+CLAUDE.md
+
+# macOS
+.DS_Store
+
+# Editor metadata
+.idea/
+.vscode/
+*.iml
