@@ -12,6 +12,7 @@ Lab works and project submissions from my studies at **Kyiv Polytechnic Institut
 | [`mobile/`](./mobile) | Android Development | Java · Kotlin · Android SDK · Material Design |
 | [`system_programming/`](./system_programming) | System Programming | C · C++ · ARM Assembly · Linux kernel API |
 | [`statistics/`](./statistics) | Statistics & Experimental Design | Python · NumPy · SciPy |
+| [`agentic_algorithms/`](./agentic_algorithms) | Agentic Algorithms | Python · NumPy · Flask · Pygame · SQLite |
 
 ---
 
@@ -21,6 +22,7 @@ Lab works and project submissions from my studies at **Kyiv Polytechnic Institut
 - **[Android](./mobile)** — four Android apps covering fragment navigation, custom time arithmetic, graph rendering with MPAndroidChart/GraphView, and a full multi-screen app with charts and a film catalogue.
 - **[System Programming](./system_programming)** — C/C++ CLI tools and Linux kernel modules (ring-0), then bare-metal ARM firmware, bootloader, and kernel written in Assembly.
 - **[Statistics](./statistics)** — statistical experiment design using full factorial $2^3$ DOE, coded variables, Cochran's test, and response surface regression.
+- **[Agentic Algorithms](./agentic_algorithms)** — ACO metaheuristic for TSP, an evolutionary life simulation where agents grow neural networks through mutation, and a multi-source cryptocurrency event monitor correlating raw HTTP and NNTP signals.
 
 ---
 

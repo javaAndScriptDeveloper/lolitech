@@ -1,0 +1,38 @@
+============================================================
+ARTIFICIAL LIFE SIMULATION - FINAL REPORT
+============================================================
+
+Total Iterations: 116
+
+FINAL POPULATIONS:
+------------------------------
+Plants: 15000
+Herbivores: 6043
+Carnivores: 5
+
+HERBIVORE STATISTICS:
+------------------------------
+Average Age: 29.1
+Max Age: 116
+Average Generation: 5.2
+Max Generation: 13
+Average Energy: 23.0
+
+CARNIVORE STATISTICS:
+------------------------------
+Average Age: 44.8
+Max Age: 115
+Average Generation: 3.6
+Max Generation: 5
+Average Energy: 33.0
+
+POPULATION HISTORY SUMMARY:
+------------------------------
+Herbivores - Min: 2733, Max: 6525
+Carnivores - Min: 5, Max: 20
+
+Peak Herbivore Generation: 5.2
+Peak Carnivore Generation: 3.6
+
+============================================================
+End of Report

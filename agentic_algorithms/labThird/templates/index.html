@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Market Intelligence</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header class="header">
+        <h1><span class="logo">&#x26A1;</span> Crypto Market Intelligence</h1>
+        <div class="status-bar">
+            <span>
+                <span id="dot-http-worker" class="status-dot warning"></span>HTTP
+            </span>
+            <span>
+                <span id="dot-nntp-worker" class="status-dot warning"></span>NNTP
+            </span>
+            <span>
+                <span id="dot-correlator-worker" class="status-dot warning"></span>Engine
+            </span>
+            <span>Uptime: <strong id="uptime">—</strong></span>
+        </div>
+        <nav class="nav-links">
+            <a href="/">Dashboard</a>
+            <a href="/conf">Config</a>
+        </nav>
+    </header>
+
+    <main class="dashboard">
+        <!-- HTTP Status Panel -->
+        <div class="panel">
+            <div class="panel-header">
+                HTTP Exchange Monitor
+                <span class="count" id="http-count">0</span>
+            </div>
+            <div class="panel-body">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Source</th>
+                            <th>Content-Length</th>
+                            <th>Status</th>
+                            <th>Checked</th>
+                        </tr>
+                    </thead>
+                    <tbody id="http-tbody">
+                        <tr><td colspan="4" class="empty-state">Waiting for data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- NNTP Feed Panel -->
+        <div class="panel">
+            <div class="panel-header">
+                NNTP News Feed
+                <span class="count" id="nntp-count">0</span>
+            </div>
+            <div class="panel-body">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Group</th>
+                            <th>Subject</th>
+                            <th>Keywords</th>
+                            <th>Fetched</th>
+                        </tr>
+                    </thead>
+                    <tbody id="nntp-tbody">
+                        <tr><td colspan="4" class="empty-state">Waiting for data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Alerts Panel -->
+        <div class="panel">
+            <div class="panel-header">
+                Market Alerts
+                <span class="count" id="alerts-count">0</span>
+            </div>
+            <div class="panel-body" id="alerts-body">
+                <div class="empty-state">No alerts yet. Monitoring...</div>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

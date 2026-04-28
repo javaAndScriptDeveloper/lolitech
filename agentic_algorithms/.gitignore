@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.idea/
+.claude
+*.odt#
+*.md
+!README.md
+.venv
+ЛАСКСІІСdocx.pdf

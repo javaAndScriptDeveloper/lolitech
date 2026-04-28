@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration — Crypto Market Intelligence</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header class="header">
+        <h1><span class="logo">&#x26A1;</span> Crypto Market Intelligence</h1>
+        <div class="status-bar">
+            <span>Configuration</span>
+        </div>
+        <nav class="nav-links">
+            <a href="/">Dashboard</a>
+            <a href="/conf">Config</a>
+        </nav>
+    </header>
+
+    <div class="config-container">
+        <!-- Keywords -->
+        <div class="config-section">
+            <h3>Tracked Tokens</h3>
+            <div class="content">
+                <div class="tag-list" id="token-tags"></div>
+                <div class="input-row">
+                    <input type="text" id="new-token" placeholder="Add token (e.g. BTC)">
+                    <button onclick="addToken()">Add</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="config-section">
+            <h3>Action Words</h3>
+            <div class="content">
+                <div class="tag-list" id="action-tags"></div>
+                <div class="input-row">
+                    <input type="text" id="new-action" placeholder="Add action word (e.g. listing)">
+                    <button onclick="addAction()">Add</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- HTTP Sources -->
+        <div class="config-section">
+            <h3>HTTP Sources</h3>
+            <div class="content" id="http-sources-list"></div>
+        </div>
+
+        <!-- NNTP Sources -->
+        <div class="config-section">
+            <h3>NNTP Sources</h3>
+            <div class="content" id="nntp-sources-list"></div>
+        </div>
+
+        <!-- Thresholds -->
+        <div class="config-section">
+            <h3>Thresholds</h3>
+            <div class="content">
+                <div class="input-row">
+                    <label>Min Alert Score</label>
+                    <input type="number" id="th-min-alert" min="0" max="100">
+                </div>
+                <div class="input-row">
+                    <label>High Priority Score</label>
+                    <input type="number" id="th-high" min="0" max="100">
+                </div>
+                <div class="input-row">
+                    <label>Monitor Score</label>
+                    <input type="number" id="th-monitor" min="0" max="100">
+                </div>
+                <div class="input-row">
+                    <label>Time Window (min)</label>
+                    <input type="number" id="th-window" min="1" max="1440">
+                </div>
+                <div class="input-row">
+                    <label>Content Change %</label>
+                    <input type="number" id="th-change-pct" min="1" max="100">
+                </div>
+                <div class="input-row">
+                    <label>Min Keyword Matches</label>
+                    <input type="number" id="th-min-kw" min="1" max="20">
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="button-row">
+            <button onclick="saveConfig()">Save Configuration</button>
+            <button class="secondary" onclick="exportConfig()">Export JSON</button>
+            <button class="secondary" onclick="document.getElementById('import-file').click()">Import JSON</button>
+            <input type="file" id="import-file" accept=".json" style="display:none" onchange="importConfig(event)">
+        </div>
+        <div id="save-status" style="margin-top:12px; font-size:13px;"></div>
+    </div>
+
+    <script>
+    let config = {};
+
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch("/api/config")
+            .then(r => r.json())
+            .then(data => {
+                config = data;
+                renderAll();
+            });
+    });
+
+    function renderAll() {
+        renderTokens();
+        renderActions();
+        renderHTTPSources();
+        renderNNTPSources();
+        renderThresholds();
+    }
+
+    // --- Tokens ---
+    function renderTokens() {
+        const el = document.getElementById("token-tags");
+        const tokens = (config.keywords || {}).tokens || [];
+        el.innerHTML = tokens.map((t, i) =>
+            `<span class="tag">${esc(t)}<span class="remove-tag" onclick="removeToken(${i})">&times;</span></span>`
+        ).join("");
+    }
+
+    function addToken() {
+        const input = document.getElementById("new-token");
+        const val = input.value.trim().toUpperCase();
+        if (!val) return;
+        if (!config.keywords) config.keywords = {};
+        if (!config.keywords.tokens) config.keywords.tokens = [];
+        if (!config.keywords.tokens.includes(val)) {
+            config.keywords.tokens.push(val);
+            renderTokens();
+        }
+        input.value = "";
+    }
+
+    function removeToken(i) {
+        config.keywords.tokens.splice(i, 1);
+        renderTokens();
+    }
+
+    // --- Action words ---
+    function renderActions() {
+        const el = document.getElementById("action-tags");
+        const words = (config.keywords || {}).action_words || [];
+        el.innerHTML = words.map((w, i) =>
+            `<span class="tag">${esc(w)}<span class="remove-tag" onclick="removeAction(${i})">&times;</span></span>`
+        ).join("");
+    }
+
+    function addAction() {
+        const input = document.getElementById("new-action");
+        const val = input.value.trim().toLowerCase();
+        if (!val) return;
+        if (!config.keywords) config.keywords = {};
+        if (!config.keywords.action_words) config.keywords.action_words = [];
+        if (!config.keywords.action_words.includes(val)) {
+            config.keywords.action_words.push(val);
+            renderActions();
+        }
+        input.value = "";
+    }
+
+    function removeAction(i) {
+        config.keywords.action_words.splice(i, 1);
+        renderActions();
+    }
+
+    // --- HTTP Sources ---
+    function renderHTTPSources() {
+        const el = document.getElementById("http-sources-list");
+        const sources = config.http_sources || [];
+        el.innerHTML = sources.map((s, i) =>
+            `<div class="source-item">
+                <div class="source-info">
+                    <div class="source-name">${esc(s.name)}</div>
+                    <div class="source-url">${esc(s.host)}${esc(s.path)}</div>
+                </div>
+                <button class="danger" onclick="removeHTTPSource(${i})">Remove</button>
+            </div>`
+        ).join("");
+    }
+
+    function removeHTTPSource(i) {
+        config.http_sources.splice(i, 1);
+        renderHTTPSources();
+    }
+
+    // --- NNTP Sources ---
+    function renderNNTPSources() {
+        const el = document.getElementById("nntp-sources-list");
+        const sources = config.nntp_sources || [];
+        el.innerHTML = sources.map((s, i) =>
+            `<div class="source-item">
+                <div class="source-info">
+                    <div class="source-name">${esc(s.server)}:${s.port || 119}</div>
+                    <div class="source-url">Groups: ${(s.groups || []).join(", ")}</div>
+                </div>
+                <button class="danger" onclick="removeNNTPSource(${i})">Remove</button>
+            </div>`
+        ).join("");
+    }
+
+    function removeNNTPSource(i) {
+        config.nntp_sources.splice(i, 1);
+        renderNNTPSources();
+    }
+
+    // --- Thresholds ---
+    function renderThresholds() {
+        const th = config.thresholds || {};
+        const kw = config.keywords || {};
+        document.getElementById("th-min-alert").value = th.min_alert_score || 30;
+        document.getElementById("th-high").value = th.high_priority_score || 70;
+        document.getElementById("th-monitor").value = th.monitor_score || 50;
+        document.getElementById("th-window").value = th.time_window_minutes || 60;
+        document.getElementById("th-change-pct").value = th.content_length_change_pct || 5;
+        document.getElementById("th-min-kw").value = kw.min_keyword_matches || 2;
+    }
+
+    function gatherThresholds() {
+        if (!config.thresholds) config.thresholds = {};
+        if (!config.keywords) config.keywords = {};
+        config.thresholds.min_alert_score = parseInt(document.getElementById("th-min-alert").value) || 30;
+        config.thresholds.high_priority_score = parseInt(document.getElementById("th-high").value) || 70;
+        config.thresholds.monitor_score = parseInt(document.getElementById("th-monitor").value) || 50;
+        config.thresholds.time_window_minutes = parseInt(document.getElementById("th-window").value) || 60;
+        config.thresholds.content_length_change_pct = parseInt(document.getElementById("th-change-pct").value) || 5;
+        config.keywords.min_keyword_matches = parseInt(document.getElementById("th-min-kw").value) || 2;
+    }
+
+    // --- Save / Export / Import ---
+    function saveConfig() {
+        gatherThresholds();
+        const status = document.getElementById("save-status");
+        status.textContent = "Saving...";
+        status.style.color = "var(--text-secondary)";
+
+        fetch("/api/config", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(config)
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.error) {
+                status.textContent = "Error: " + data.error;
+                status.style.color = "var(--accent-red)";
+            } else {
+                status.textContent = "Configuration saved successfully.";
+                status.style.color = "var(--accent-green)";
+            }
+        })
+        .catch(err => {
+            status.textContent = "Network error: " + err.message;
+            status.style.color = "var(--accent-red)";
+        });
+    }
+
+    function exportConfig() {
+        gatherThresholds();
+        const blob = new Blob([JSON.stringify(config, null, 4)], {type: "application/json"});
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "config.json";
+        a.click();
+    }
+
+    function importConfig(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                config = JSON.parse(e.target.result);
+                renderAll();
+                document.getElementById("save-status").textContent = "Imported. Click Save to apply.";
+                document.getElementById("save-status").style.color = "var(--accent-orange)";
+            } catch (err) {
+                alert("Invalid JSON file");
+            }
+        };
+        reader.readAsText(file);
+    }
+
+    function esc(str) {
+        if (str === null || str === undefined) return "";
+        const div = document.createElement("div");
+        div.textContent = String(str);
+        return div.innerHTML;
+    }
+    </script>
+</body>
+</html>

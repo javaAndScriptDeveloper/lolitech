@@ -1,0 +1,48 @@
+{
+    "http_sources": [
+        {
+            "name": "Binance Announcements",
+            "host": "www.binance.com",
+            "path": "/en/support/announcement",
+            "check_interval": 60
+        },
+        {
+            "name": "Coinbase Blog",
+            "host": "www.coinbase.com",
+            "path": "/blog",
+            "check_interval": 60
+        },
+        {
+            "name": "Kraken Blog",
+            "host": "blog.kraken.com",
+            "path": "/",
+            "check_interval": 60
+        }
+    ],
+    "nntp_sources": [
+        {
+            "server": "news.neodome.net",
+            "port": 119,
+            "groups": [
+                "sci.crypt",
+                "misc.invest.stocks",
+                "misc.invest.futures"
+            ],
+            "check_interval": 120
+        }
+    ],
+    "keywords": {
+        "tokens": ["BTC", "ETH", "SOL", "ADA", "XRP", "DOGE", "DOT", "AVAX", "MATIC", "LINK"],
+        "action_words": ["listing", "delisting", "fork", "upgrade", "hack", "ban", "regulation", "approval", "ETF", "airdrop"],
+        "min_keyword_matches": 2
+    },
+    "thresholds": {
+        "time_window_minutes": 60,
+        "min_alert_score": 30,
+        "high_priority_score": 70,
+        "monitor_score": 50,
+        "content_length_change_pct": 5
+    },
+    "db_path": "lab3.db",
+    "web_port": 8080
+}
