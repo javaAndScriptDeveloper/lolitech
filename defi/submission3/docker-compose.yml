@@ -1,0 +1,52 @@
+services:
+  node1:
+    build: .
+    ports:
+      - "9091:9091"
+    environment:
+      - PEER_TO_PEER_NODE_ID=node-1
+      - SERVER_PORT=9091
+      - PEER_TO_PEER_TCP_PORT=9091
+      - PEER_TO_PEER_BROADCAST_ADDRESS=255.255.255.255
+    networks:
+      - p2p-network
+
+  node2:
+    build: .
+    ports:
+      - "9092:9092"
+    environment:
+      - PEER_TO_PEER_NODE_ID=node-2
+      - SERVER_PORT=9092
+      - PEER_TO_PEER_TCP_PORT=9092
+      - PEER_TO_PEER_BROADCAST_ADDRESS=255.255.255.255
+    networks:
+      - p2p-network
+
+  node3:
+    build: .
+    ports:
+      - "9093:9093"
+    environment:
+      - PEER_TO_PEER_NODE_ID=node-3
+      - SERVER_PORT=9093
+      - PEER_TO_PEER_TCP_PORT=9093
+      - PEER_TO_PEER_BROADCAST_ADDRESS=255.255.255.255
+    networks:
+      - p2p-network
+
+  node4:
+    build: .
+    ports:
+      - "9094:9094"
+    environment:
+      - PEER_TO_PEER_NODE_ID=node-4
+      - SERVER_PORT=9094
+      - PEER_TO_PEER_TCP_PORT=9094
+      - PEER_TO_PEER_BROADCAST_ADDRESS=255.255.255.255
+    networks:
+      - p2p-network
+
+networks:
+  p2p-network:
+    driver: bridge
