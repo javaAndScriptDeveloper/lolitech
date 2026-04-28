@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: submission1
+  rabbitmq:
+    username: guest
+    password: guest
+  datasource:
+    url: jdbc:h2:mem:flowersdb
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+
+grpc:
+  client:
+    flower-service:
+      address: 'static://localhost:9090'
+      negotiationType: plaintext

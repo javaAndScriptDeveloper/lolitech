@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+package org.example.submission1;
+
+message Empty {}
+
+message RegisterFlowerMessage {
+  string name = 1;
+
+  enum FlowerSoilType {
+    FLOWER_SOIL_TYPE_UNSPECIFIED = 0;
+    FLOWER_SOIL_TYPE_GROUND = 1;
+    FLOWER_SOIL_TYPE_PODZOLIC = 2;
+    FLOWER_SOIL_TYPE_SOD_PODZOLIC = 3;
+  }
+
+  FlowerSoilType soilType = 2;
+
+  string origin = 3;
+
+  message VisualParameters {
+    enum Color {
+      COLOR_UNSPECIFIED = 0;
+      COLOR_RED = 1;
+      COLOR_GREEN = 2;
+      COLOR_BLUE = 3;
+    }
+
+    Color leafColor = 1;
+
+    int64 averageLength = 2;
+  }
+
+  VisualParameters visualParameters = 4;
+
+  message GrowingTips {
+
+    int64 averageTemperature = 1;
+
+    bool isLightFriendly = 2;
+  }
+
+  GrowingTips growingTips = 5;
+
+  enum Multiplying {
+    MULTIPLYING_UNSPECIFIED = 0;
+    MULTIPLYING_BY_LEAFS = 1;
+    MULTIPLYING_BY_LIVING = 2;
+    MULTIPLYING_BY_SEEDS = 3;
+  }
+
+  Multiplying multiplying = 6;
+}
+
+service FlowerRegistrationService {
+  rpc SubscribeMessages (Empty) returns (stream RegisterFlowerMessage);
+}
