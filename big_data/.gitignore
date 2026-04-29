@@ -1,0 +1,14 @@
+# Derby local metastore (generated at runtime)
+metastore_db/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE
+.idea/
+.vscode/
+
+# Claude tooling
+CLAUDE.md

@@ -1,0 +1,9 @@
+CREATE EXTERNAL TABLE IF NOT EXISTS employee_salary (
+  employee_id INT,
+  avg_salary FLOAT
+)
+
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE LOCATION 'hdfs://namenode:9000/data/result.csv';
