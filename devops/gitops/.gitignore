@@ -1,0 +1,6 @@
+# IDE
+.idea/
+.vscode/
+
+# Claude tooling
+CLAUDE.md
