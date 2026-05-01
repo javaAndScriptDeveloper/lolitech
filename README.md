@@ -15,6 +15,7 @@ Lab works and project submissions from my studies at **Kyiv Polytechnic Institut
 | [`agentic_algorithms/`](./agentic_algorithms) | Agentic Algorithms | Python · NumPy · Flask · Pygame · SQLite |
 | [`big_data/`](./big_data) | Big Data | Python · PySpark · Hadoop HDFS · YARN · Hive · Docker |
 | [`devops/`](./devops) | DevOps | Docker · GitHub Actions · Terraform · AWS · Kubernetes · FluxCD |
+| [`neural_networks/`](./neural_networks) | Neural Networks & Deep Learning | Python · PyTorch · scikit-learn |
 
 ---
 
@@ -27,6 +28,7 @@ Lab works and project submissions from my studies at **Kyiv Polytechnic Institut
 - **[Agentic Algorithms](./agentic_algorithms)** — ACO metaheuristic for TSP, an evolutionary life simulation where agents grow neural networks through mutation, and a multi-source cryptocurrency event monitor correlating raw HTTP and NNTP signals.
 - **[Big Data](./big_data)** — end-to-end pipeline over a 1M-row dataset: PySpark MapReduce job with broadcast variables for currency conversion, results stored in HDFS and exposed via an external Hive table, full cluster running locally in Docker Compose (Hadoop + YARN + Spark + Hive + PostgreSQL).
 - **[DevOps](./devops)** — CI/CD pipeline chaining GitHub Actions (multi-arch Docker build → Terraform EC2 deploy) with a Jenkins alternative and Kubernetes manifests; FluxCD v2 GitOps setup reconciling a live cluster from git; modular Terraform provisioning a VPC, subnet, security group, and EC2 instance on AWS.
+- **[Neural Networks](./neural_networks)** — CNN hyperparameter tuning and training on FashionMNIST with custom architecture and ResNet variants using PyTorch, with model serving for inference.
 
 ---
 

@@ -1,0 +1,68 @@
+{
+  "records": [
+    {
+      "hyperparams": {
+        "conv1_out_channels": 32,
+        "conv2_out_channels": 64,
+        "hidden_size": 128
+      },
+      "accuracy": 0.8825
+    },
+    {
+      "hyperparams": {
+        "conv1_out_channels": 64,
+        "conv2_out_channels": 64,
+        "hidden_size": 128
+      },
+      "accuracy": 0.8781
+    },
+    {
+      "hyperparams": {
+        "conv1_out_channels": 64,
+        "conv2_out_channels": 64,
+        "hidden_size": 64
+      },
+      "accuracy": 0.8774
+    },
+    {
+      "hyperparams": {
+        "conv1_out_channels": 64,
+        "conv2_out_channels": 128,
+        "hidden_size": 128
+      },
+      "accuracy": 0.884
+    },
+    {
+      "hyperparams": {
+        "conv1_out_channels": 64,
+        "conv2_out_channels": 128,
+        "hidden_size": 256
+      },
+      "accuracy": 0.8946
+    },
+    {
+      "hyperparams": {
+        "conv1_out_channels": 64,
+        "conv2_out_channels": 256,
+        "hidden_size": 256
+      },
+      "accuracy": 0.8921
+    },
+    {
+      "hyperparams": {
+        "conv1_out_channels": 64,
+        "conv2_out_channels": 256,
+        "hidden_size": 256
+      },
+      "accuracy": 0.9051
+    },
+    {
+      "hyperparams": {
+        "conv1_out_channels": 128,
+        "conv2_out_channels": 256,
+        "hidden_size": 256
+      },
+      "accuracy": 0.89835
+    }
+  ]
+}

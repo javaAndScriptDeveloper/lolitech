@@ -1,0 +1,32 @@
+{
+  "records":[
+    {
+      "hyperparams": {
+        "lr": 0.01,
+        "momentum": 0.9
+      },
+      "accuracy": 0.99873
+    },
+    {
+      "hyperparams": {
+        "lr": 0.02,
+        "momentum": 0.87
+      },
+      "accuracy": 0.99544
+    },
+    {
+      "hyperparams": {
+        "lr": 0.03,
+        "momentum": 0.91
+      },
+      "accuracy": 0.99678
+    },
+    {
+      "hyperparams": {
+        "lr": 0.04,
+        "momentum": 0.92
+      },
+      "accuracy": 0.99778
+    }
+  ]
+}
