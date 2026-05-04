@@ -14,4 +14,6 @@ public class BroadcastRequest {
     String nodeId;
 
     int tcpPort;
+
+    String publicKey;
 }

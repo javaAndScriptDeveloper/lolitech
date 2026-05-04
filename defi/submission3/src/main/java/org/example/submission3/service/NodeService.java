@@ -4,11 +4,9 @@ import org.example.submission3.model.Node;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Optional;
 
 @Service
 public class NodeService {
@@ -33,6 +31,12 @@ public class NodeService {
 
     public List<Node> getNodes() {
         return new ArrayList<>(nodes);
+    }
+
+    public Optional<Node> findById(String id) {
+        return nodes.stream()
+                .filter(n -> n.getId().equals(id))
+                .findFirst();
     }
 
 }

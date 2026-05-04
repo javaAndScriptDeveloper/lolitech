@@ -12,4 +12,6 @@ public class Node {
     String id;
 
     InetSocketAddress address;
+
+    String publicKey;
 }

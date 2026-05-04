@@ -64,7 +64,10 @@ public class NodeDiscoveryService {
         var node = Node.builder()
                 .id(broadcastRequest.getNodeId())
                 .address(inetSocketAddress)
-                        .build();
+                .publicKey(broadcastRequest.getPublicKey())
+                .build();
+        log.info("NodeDiscoveryService: Discovered node [{}] at [{}] with public key [{}]",
+                node.getId(), inetSocketAddress, broadcastRequest.getPublicKey());
         nodeService.add(node);
     }
 }
